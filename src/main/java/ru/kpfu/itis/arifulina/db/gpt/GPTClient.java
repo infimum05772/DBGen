@@ -15,10 +15,11 @@ import java.util.stream.Collectors;
 
 public class GPTClient {
     private static final String GPT_URL = "https://bothub.chat/api/dev/chat/completion/sync";
-    private static final String ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2N2NlNDExLTZlZjMtNGQ1Zi04MGNhLTdkMmMxZjI4OGJlNyIsImlzRGV2ZWxvcGVyIjp0cnVlLCJpYXQiOjE2OTgwOTgxODIsImV4cCI6MjAxMzY3NDE4Mn0.MS0qWJGTjYPZzV2tOCpR8u8MHAcflNqzrl4KWJRZmuY";
-    private static final HttpClient httpClient = new HTTPClientImpl(GPT_URL, ACCESS_TOKEN);
-
-    public static boolean generateList(String value, int amount) {
+    private final HttpClient httpClient;
+    public GPTClient(String accessToken) {
+        httpClient = new HTTPClientImpl(GPT_URL, accessToken);
+    }
+    public boolean generateList(String value, int amount) {
 
         Map<String, Object> params = getParams(value, amount);
 
@@ -35,7 +36,7 @@ public class GPTClient {
         }
     }
 
-    private static Map<String, Object> getParams(String value, int amount) {
+    private Map<String, Object> getParams(String value, int amount) {
         Map<String, Object> params = new HashMap<>();
 
         JsonArray messages = new JsonArray();
