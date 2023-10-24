@@ -6,3 +6,4 @@ Use String Generator <b>getString</b> method to get random string from generated
 
 ### Other values generation
 Use Values Generator to generate other values like timestamps, phones, integers and so on.
+
