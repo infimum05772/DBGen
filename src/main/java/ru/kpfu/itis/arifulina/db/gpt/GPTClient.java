@@ -18,9 +18,6 @@ public class GPTClient {
     private static final String ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2N2NlNDExLTZlZjMtNGQ1Zi04MGNhLTdkMmMxZjI4OGJlNyIsImlzRGV2ZWxvcGVyIjp0cnVlLCJpYXQiOjE2OTgwOTgxODIsImV4cCI6MjAxMzY3NDE4Mn0.MS0qWJGTjYPZzV2tOCpR8u8MHAcflNqzrl4KWJRZmuY";
     private static final HttpClient httpClient = new HTTPClientImpl(GPT_URL, ACCESS_TOKEN);
 
-    public static void main(String[] args) {
-        generateList("hackathon organization names", 5);
-    }
     public static boolean generateList(String value, int amount) {
 
         Map<String, Object> params = getParams(value, amount);
