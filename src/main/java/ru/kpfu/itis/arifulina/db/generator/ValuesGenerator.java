@@ -12,9 +12,9 @@ import java.util.random.RandomGenerator;
 
 public class ValuesGenerator extends Random {
 
-    private Random rand = new Random();
+    private Random rand;
 
-    ValuesGenerator(Random rand) {
+    public ValuesGenerator(Random rand) {
         this.rand = rand;
     }
 
@@ -76,11 +76,6 @@ public class ValuesGenerator extends Random {
 
     public static Random from(RandomGenerator generator) {
         return Random.from(generator);
-    }
-
-    @Override
-    public void setSeed(long seed) {
-        rand.setSeed(seed);
     }
 
     @Override
