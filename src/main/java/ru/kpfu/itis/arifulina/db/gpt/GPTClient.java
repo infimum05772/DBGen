@@ -19,6 +19,7 @@ public class GPTClient {
     public GPTClient(String accessToken) {
         httpClient = new HTTPClientImpl(GPT_URL, accessToken);
     }
+
     public boolean generateList(String value, int amount) {
 
         Map<String, Object> params = getParams(value, amount);

@@ -16,11 +16,13 @@ public class ValuesGenerator extends Random {
 
     public ValuesGenerator(Random rand) {
         this.rand = rand;
+        daysInMonths = new HashMap<>();
+        initDays();
     }
 
-    private final Map<Integer, Integer> daysInMonths = new HashMap<>();
+    private final Map<Integer, Integer> daysInMonths;
 
-    ValuesGenerator() {
+    private void initDays() {
         daysInMonths.put(1, 31);
         daysInMonths.put(2, 28);
         daysInMonths.put(3, 31);
@@ -51,11 +53,11 @@ public class ValuesGenerator extends Random {
             throw new ValuesGeneratorException("Not supported values of year.");
         }
         int year = rand.nextInt(ValuesConstants.MIN_YEAR, bound.getYear() + 1);
-        int month = year != bound.getYear() ? rand.nextInt(1, ValuesConstants.MAX_MONTH) : rand.nextInt(1, bound.getMonthValue() + 1);
-        int day = month != bound.getMonthValue() ? rand.nextInt(1, daysInMonths.get(month)) + 1 : rand.nextInt(1, bound.getDayOfMonth() + 1);
-        int hour = day != bound.getDayOfMonth() ? rand.nextInt(1, ValuesConstants.MAX_HOURS) : rand.nextInt(1, bound.getHour() + 1);
-        int minute = hour != bound.getHour() ? rand.nextInt(1, ValuesConstants.MAX_MINUTES) : rand.nextInt(1, bound.getMinute() + 1);
-        int second = minute != bound.getMinute() ? rand.nextInt(1, ValuesConstants.MAX_SECONDS) : rand.nextInt(1, bound.getSecond());
+        int month = year != bound.getYear() ? rand.nextInt(1, ValuesConstants.MAX_MONTH + 1) : rand.nextInt(1, bound.getMonthValue() + 1);
+        int day = month != bound.getMonthValue() ? rand.nextInt(1, daysInMonths.get(month) + 1) : rand.nextInt(1, bound.getDayOfMonth() + 1);
+        int hour = day != bound.getDayOfMonth() ? rand.nextInt(ValuesConstants.MAX_HOURS) : rand.nextInt(bound.getHour() + 1);
+        int minute = hour != bound.getHour() ? rand.nextInt(ValuesConstants.MAX_MINUTES) : rand.nextInt(bound.getMinute() + 1);
+        int second = minute != bound.getMinute() ? rand.nextInt(ValuesConstants.MAX_SECONDS) : rand.nextInt(bound.getSecond());
 
         return Timestamp.valueOf(LocalDateTime.of(year, month, day, hour, minute, second));
     }
